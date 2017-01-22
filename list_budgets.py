@@ -16,7 +16,11 @@ try:
     con.query(query)
     result = con.use_result()
 
-    print result.fetch_row()[0]
+    while True:
+        row = result.fetch_row()
+        if row == ():
+            break
+        print "%s %s" % row[0]
 
 except _mysql.Error, e:
     print "Error %d: %s" % (e.args[0], e.args[1])
